@@ -1,11 +1,11 @@
-package main
+package math
 
 type MatrixMap = map[int]map[int]int
 
 type IMatrix interface {
 	Set(array MatrixMap)
-	SetElement(row int, column int, value int) bool
-	GetElement(row int, column int) (int, bool)
+	SetElement(row, column, value int) bool
+	GetElement(row, column int) (int, bool)
 }
 
 type Matrix struct {
@@ -28,7 +28,7 @@ func (m Matrix) Set(array MatrixMap) {
 	}
 }
 
-func (m Matrix) SetElement(row int, column int, value int) bool {
+func (m Matrix) SetElement(row, column, value int) bool {
 	if row > m.Rows || row < 0 || column > m.Columns || column < 0 {
 		return false
 	}
@@ -37,7 +37,7 @@ func (m Matrix) SetElement(row int, column int, value int) bool {
 	return true
 }
 
-func (m Matrix) GetElement(row int, column int) (int, bool) {
+func (m Matrix) GetElement(row, column int) (int, bool) {
 	if row > m.Rows || row < 0 || column > m.Columns || column < 0 {
 		return -1, false
 	}
@@ -45,7 +45,7 @@ func (m Matrix) GetElement(row int, column int) (int, bool) {
 	return m.Matrix[row][column], true
 }
 
-func NewMatrix(rows int, columns int, array MatrixMap) Matrix {
+func NewMatrix(rows, columns int, array MatrixMap) Matrix {
 	if rows <= 0 {
 		rows = 1
 	}

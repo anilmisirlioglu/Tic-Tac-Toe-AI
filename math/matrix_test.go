@@ -1,4 +1,4 @@
-package main
+package math
 
 import "testing"
 
@@ -8,7 +8,7 @@ func TestNewMatrix(t *testing.T) {
 		for c := 0; c < m.Columns; c++ {
 			item, found := m.Matrix[r][c]
 			if !found {
-				t.Fatalf("Actual: %d, Expected: 0", item)
+				t.Errorf("Actual: %d, Expected: 0", item)
 			}
 		}
 	}
@@ -18,7 +18,7 @@ func TestMatrix_GetElement(t *testing.T) {
 	m := NewMatrix(3, 3, MatrixMap{})
 	item, found := m.GetElement(1, 2)
 	if !found {
-		t.Fatalf("Actual: %d, Expected: 0", item)
+		t.Errorf("Actual: %d, Expected: 0", item)
 	}
 }
 
@@ -28,6 +28,6 @@ func TestMatrix_SetElement(t *testing.T) {
 
 	item, found := m.GetElement(1, 2)
 	if !found {
-		t.Fatalf("Actual %d, Expected: 1", item)
+		t.Errorf("Actual %d, Expected: 1", item)
 	}
 }

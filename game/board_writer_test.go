@@ -16,6 +16,6 @@ func TestNewBoardWriterBoardWriter(t *testing.T) {
 	}
 
 	if value != 0 {
-		t.Errorf("Actual: %d, Excepted: 0", value)
+		t.Errorf("Actual: %d, Expected: 0", value)
 	}
 }

@@ -11,19 +11,19 @@ type IMatrix interface {
 type Matrix struct {
 	Rows    int
 	Columns int
-	Matrix  MatrixMap
+	Map     MatrixMap
 }
 
 func (m Matrix) Set(array MatrixMap) {
 	for r := 0; r < m.Rows; r++ {
-		m.Matrix[r] = map[int]int{}
+		m.Map[r] = map[int]int{}
 		for c := 0; c < m.Columns; c++ {
 			item := 0
 			if value, found := array[r][c]; found {
 				item = value
 			}
 
-			m.Matrix[r][c] = item
+			m.Map[r][c] = item
 		}
 	}
 }
@@ -33,7 +33,7 @@ func (m Matrix) SetElement(row, column, value int) bool {
 		return false
 	}
 
-	m.Matrix[row][column] = value
+	m.Map[row][column] = value
 	return true
 }
 
@@ -42,7 +42,7 @@ func (m Matrix) GetElement(row, column int) (int, bool) {
 		return -1, false
 	}
 
-	return m.Matrix[row][column], true
+	return m.Map[row][column], true
 }
 
 func NewMatrix(rows, columns int, array MatrixMap) Matrix {
@@ -57,7 +57,7 @@ func NewMatrix(rows, columns int, array MatrixMap) Matrix {
 	matrix := Matrix{
 		Rows:    rows,
 		Columns: columns,
-		Matrix:  MatrixMap{},
+		Map:     MatrixMap{},
 	}
 
 	matrix.Set(array)

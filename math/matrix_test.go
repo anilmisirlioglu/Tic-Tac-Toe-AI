@@ -6,7 +6,7 @@ func TestNewMatrix(t *testing.T) {
 	m := NewMatrix(3, 3, MatrixMap{})
 	for r := 0; r < m.Rows; r++ {
 		for c := 0; c < m.Columns; c++ {
-			item, found := m.Matrix[r][c]
+			item, found := m.Map[r][c]
 			if !found {
 				t.Errorf("Actual: %d, Expected: 0", item)
 			}

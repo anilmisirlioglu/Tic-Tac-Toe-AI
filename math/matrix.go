@@ -37,12 +37,12 @@ func (m Matrix) SetElement(row, column, value int) bool {
 	return true
 }
 
-func (m Matrix) GetElement(row, column int) (int, bool) {
+func (m Matrix) GetElement(row, column int) int {
 	if row > m.Rows || row < 0 || column > m.Columns || column < 0 {
-		return -1, false
+		return -1
 	}
 
-	return m.Map[row][column], true
+	return m.Map[row][column]
 }
 
 func NewMatrix(rows, columns int, array MatrixMap) Matrix {

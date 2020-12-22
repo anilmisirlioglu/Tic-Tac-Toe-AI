@@ -8,10 +8,10 @@ import (
 func TestNewBoardWriterBoardWriter(t *testing.T) {
 	matrix := math.NewMatrix(3, 3, nil)
 
-	board := NewBoardWriter(matrix)
+	board := NewBoardWriter(&matrix)
 
-	value, err := board.matrix.GetElement(3, 3)
-	if !err {
+	value := board.matrix.GetElement(3, 3)
+	if value == -1 {
 		t.Errorf("Element not found.")
 	}
 

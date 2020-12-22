@@ -57,7 +57,7 @@ func NewMatrix(rows, columns int, array MatrixMap) Matrix {
 	matrix := Matrix{
 		Rows:    rows,
 		Columns: columns,
-		Map:     MatrixMap{},
+		Map:     make(MatrixMap),
 	}
 
 	matrix.Set(array)

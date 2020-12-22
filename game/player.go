@@ -10,7 +10,7 @@ type Human struct {
 }
 
 func (h Human) GetName() string {
-	return "Player"
+	return "Human"
 }
 
 func (h Human) GetSymbolByInt() int {

@@ -20,7 +20,7 @@ var drawData = [][]string{
 }
 
 type BoardWriter struct {
-	matrix math.Matrix
+	matrix *math.Matrix
 	table  []string
 }
 
@@ -29,7 +29,7 @@ func (w BoardWriter) DrawLine(line int) {
 		column := -1
 		for _, row := range drawData[line] {
 			if row == "" {
-				item, _ := w.matrix.GetElement(line-1, column)
+				item := w.matrix.GetElement(line-1, column)
 				row = w.detectXO(item)
 			}
 
@@ -64,7 +64,7 @@ func (w BoardWriter) String() string {
 	return strings.Join(w.table, "")
 }
 
-func NewBoardWriter(matrix math.Matrix) BoardWriter {
+func NewBoardWriter(matrix *math.Matrix) BoardWriter {
 	return BoardWriter{
 		matrix: matrix,
 		table:  []string{},

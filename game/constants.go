@@ -9,7 +9,7 @@ const (
 	NextLineMultiply = NextLineBefore ^ NextLineBehind
 
 	XWon       = 0x1
-	YWon       = 0x2
+	OWon       = 0x2
 	Draw       = 0x4
 	Unfinished = 0x8
 

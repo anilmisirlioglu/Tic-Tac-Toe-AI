@@ -19,8 +19,8 @@ const (
 
 func (c Controller) Minimax(matrix math.Matrix, depth int, player int) MinimaxPacket {
 	cpu := c.game.CPU
-	var score int
-	if score = MaxInt; cpu.GetSymbolByInt() == 1 {
+	score := MaxInt
+	if cpu.GetSymbolByInt() == player {
 		score = MinInt
 	}
 

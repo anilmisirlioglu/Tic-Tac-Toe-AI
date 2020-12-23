@@ -24,27 +24,27 @@ type Game struct {
 	Sequence          Player
 }
 
-func (g Game) Start() {
+func (g *Game) Start() {
 	Write("\n", NextLineNone, false, 0)
 	Write("Invincible Tic Tac Toe AI", NextLineMultiply, true, 2)
 
-	setup := NewSetup(&g)
+	setup := NewSetup(g)
 	setup.Start()
 
 	for g.currentRound < maxRound && !g.isFinish {
 		if g.Sequence.GetName() == "Human" {
-			Write(fmt.Sprintf("Player's turn (%s):", g.Human.Symbol), NextLineNone, true, 2)
+			Write(fmt.Sprintf("Player's turn (%s): ", g.Human.Symbol), NextLineNone, true, 2)
 
 			reader := bufio.NewReader(os.Stdin)
 			line, _ := reader.ReadString('\n')
 
-			axis := g.GetAxisAlignment(strings.ToUpper(line))
+			axis := g.GetAxisAlignment(strings.ToUpper(strings.TrimSpace(line)))
 			if axis == nil {
 				Write("Invalid field. Please select an area on the game table.", NextLineMultiply, true, 2)
 			} else {
-				element := g.matrix.GetElement(axis.Y, axis.Y)
+				element := g.matrix.GetElement(axis.X, axis.Y)
 				if element == NullIndex {
-					g.next(*axis, g.CPU)
+					g.next(*axis, &g.CPU)
 				} else {
 					Write("This field is occupied. Please select an empty space.", NextLineMultiply, true, 2)
 				}
@@ -65,15 +65,15 @@ func (g Game) Start() {
 					Controller.
 					Minimax(g.matrix, maxRound-g.currentRound, g.CPU.GetSymbolByInt()).
 					Vector2
-
-				Write(fmt.Sprintf("CPU's turn (%s): %s\n", g.CPU.Symbol, axis.String()), NextLineNone, true, 2)
-				g.next(axis, g.Human)
 			}
+
+			Write(fmt.Sprintf("CPU's turn (%s): %s\n", g.CPU.Symbol, axis.String()), NextLineNone, true, 2)
+			g.next(axis, &g.Human)
 		}
 	}
 }
 
-func (g Game) next(axis math.Vector2, sequence Player) {
+func (g *Game) next(axis math.Vector2, sequence Player) {
 	g.matrix.SetElement(axis.X, axis.Y, sequence.GetSymbolByInt())
 
 	Write(g.Writer.String(), NextLineMultiply, false, 1)
@@ -91,14 +91,14 @@ func (g Game) next(axis math.Vector2, sequence Player) {
 			winner = "Draw Over"
 		}
 
-		Write(fmt.Sprintf("Game over. Result: {%s}", winner), NextLineBehind, true, 2)
+		Write(fmt.Sprintf("Game over. Result: %s", winner), NextLineBehind, true, 2)
 	}
 
 	g.Sequence = sequence
 	g.currentRound++
 }
 
-func (g Game) GetAxisAlignment(axis string) *math.Vector2 {
+func (g *Game) GetAxisAlignment(axis string) *math.Vector2 {
 	item, ok := g.axisAlignmentData[axis]
 	if !ok {
 		return nil
@@ -107,7 +107,7 @@ func (g Game) GetAxisAlignment(axis string) *math.Vector2 {
 	return &item
 }
 
-func NewGame() *Game {
+func NewGame() Game {
 	axisAlignmentData := map[string]math.Vector2{
 		"A1": {X: 0, Y: 0},
 		"A2": {X: 0, Y: 1},
@@ -121,14 +121,11 @@ func NewGame() *Game {
 	}
 	matrix := math.NewMatrix(Vertical, Horizontal, nil)
 
-	return &Game{
+	return Game{
 		currentRound:      0,
 		isFinish:          false,
-		Human:             nil,
-		CPU:               nil,
 		Writer:            NewBoardWriter(&matrix),
 		matrix:            matrix,
 		axisAlignmentData: axisAlignmentData,
-		Sequence:          nil,
 	}
 }

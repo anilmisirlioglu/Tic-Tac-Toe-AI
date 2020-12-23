@@ -3,17 +3,19 @@ package game
 import (
 	"bufio"
 	"os"
+	"strings"
 )
 
 type Setup struct {
 	game *Game
 }
 
-func (s Setup) Start() {
+func (s *Setup) Start() {
 	Write("Please choose your character (X or O): ", NextLineNone, true, 2)
 	for {
 		reader := bufio.NewReader(os.Stdin)
 		humanSymbol, _ := reader.ReadString('\n')
+		humanSymbol = strings.ToUpper(strings.TrimSpace(humanSymbol))
 		if humanSymbol != "" && (humanSymbol == X || humanSymbol == O) {
 			var (
 				cpuSymbol string
@@ -29,9 +31,9 @@ func (s Setup) Start() {
 			human := Human{Symbol: humanSymbol}
 			cpu := CPU{Symbol: cpuSymbol}
 
-			sequence = human
+			sequence = &human
 			if cpuSymbol == X {
-				sequence = cpu
+				sequence = &cpu
 			}
 
 			s.game.Human = human

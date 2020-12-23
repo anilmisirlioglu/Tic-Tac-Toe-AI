@@ -24,7 +24,7 @@ type BoardWriter struct {
 	table  []string
 }
 
-func (w BoardWriter) DrawLine(line int) {
+func (w *BoardWriter) DrawLine(line int) {
 	if line < vertical {
 		column := -1
 		for _, row := range drawData[line] {
@@ -40,20 +40,20 @@ func (w BoardWriter) DrawLine(line int) {
 	}
 }
 
-func (w BoardWriter) draw(chars []string) {
+func (w *BoardWriter) draw(chars []string) {
 	w.table = append(w.table, chars...)
 }
 
 func (w BoardWriter) detectXO(index int) string {
 	item, found := SymbolIndexes[index]
-	if found {
+	if !found {
 		return NULL
 	}
 
 	return item
 }
 
-func (w BoardWriter) String() string {
+func (w *BoardWriter) String() string {
 	w.table = []string{}
 	for i := 0; i < vertical; i++ {
 		w.draw([]string{wall})

@@ -74,7 +74,7 @@ func (g *Game) Start() {
 }
 
 func (g *Game) next(axis math.Vector2, sequence Player) {
-	g.matrix.SetElement(axis.X, axis.Y, sequence.GetSymbolByInt())
+	g.matrix.SetElement(axis.X, axis.Y, g.Sequence.GetSymbolByInt())
 
 	Write(g.Writer.String(), NextLineMultiply, false, 1)
 

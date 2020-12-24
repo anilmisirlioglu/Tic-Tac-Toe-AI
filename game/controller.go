@@ -19,14 +19,14 @@ const (
 
 func (c Controller) Minimax(matrix math.Matrix, depth int, player int) MinimaxPacket {
 	cpu := c.game.CPU
-	score := MaxInt
+	packetScore := MaxInt
 	if cpu.GetSymbolByInt() == player {
-		score = MinInt
+		packetScore = MinInt
 	}
 
 	optimumAxisAlignment := MinimaxPacket{
 		Vector2: math.Vector2{X: -1, Y: -1},
-		Score:   score,
+		Score:   packetScore,
 	}
 
 	if depth == 0 || c.over() {

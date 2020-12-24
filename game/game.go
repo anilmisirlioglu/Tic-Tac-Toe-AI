@@ -86,7 +86,7 @@ func (g *Game) next(axis math.Vector2, sequence Player) {
 		case XWon:
 			winner = fmt.Sprintf("X Won (%s)", g.Sequence.GetName())
 		case OWon:
-			winner = fmt.Sprintf("Y Won (%s)", g.Sequence.GetName())
+			winner = fmt.Sprintf("O Won (%s)", g.Sequence.GetName())
 		default:
 			winner = "Draw Over"
 		}

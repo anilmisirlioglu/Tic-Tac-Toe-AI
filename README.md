@@ -8,13 +8,13 @@ Invincible AI based on [Minimax](https://en.wikipedia.org/wiki/Minimax) algorith
 ## Installation & Test
 
 1. First, install repository
-```sh
-git clone https://github.com/anilmisirlioglu/Tic-Tac-Toe-AI && cd Tic-Tac-Toe-AI
-```
+    ```sh
+    git clone https://github.com/anilmisirlioglu/Tic-Tac-Toe-AI && cd Tic-Tac-Toe-AI
+    ```
 
 2. Then, run it.
-```sh
-go run .
-``` 
+    ```sh
+    go run .
+    ``` 
 
 3. Finally, enjoy!
